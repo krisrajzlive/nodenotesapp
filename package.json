@@ -1,7 +1,6 @@
 {
   "name": "notes-app",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +11,15 @@
     "chalk": "^2.4.1",
     "validator": "^13.7.0",
     "yargs": "^17.5.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krisrajzlive/nodenotesapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krisrajzlive/nodenotesapp/issues"
+  },
+  "homepage": "https://github.com/krisrajzlive/nodenotesapp#readme",
+  "description": ""
 }
