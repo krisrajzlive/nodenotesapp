@@ -1,12 +1,17 @@
 const fs = require('fs')
 const chalk = require('chalk')
-const { match } = require('assert')
 
-const addNote = (title, body) => { 
+const getNotes = function(){
+    return 'This is the notes'
+}
+
+const addNote = function(title, body){
     const notes = loadNotes()
-    const duplicateNote = notes.find((note) => note.title === title )
+    const duplicateNotes = notes.filter(function(note){
+        return note.title === title
+    })
 
-    if (!duplicateNote)
+    if (duplicateNotes.length === 0)
     {
         notes.push({
             title: title,
@@ -20,10 +25,12 @@ const addNote = (title, body) => {
         console.log(chalk.red('Note title taken!'))
 }
 
-const removeNote = (title) =>
+const removeNote = function(title)
 {
     const notes = loadNotes()
-    const notesToKeep = notes.filter((note) => note.title != title)
+    const notesToKeep = notes.filter(function (note){
+        return note.title != title
+    })
     
     if (notes.length > notesToKeep.length != 0)
     {
@@ -34,24 +41,13 @@ const removeNote = (title) =>
         console.log(chalk.red('Title does not exist!'))
 }
 
-const listNotes = () =>
-{
-    const notes = loadNotes()
-
-    console.log(chalk.inverse('Your notes'))
-
-    notes.forEach((note) => {
-        console.log(note.title)
-    })
-}
-
-const saveNotes = (notes) => {
+const saveNotes = function(notes){
     const dataJSON = JSON.stringify(notes)
-
     fs.writeFileSync('notes.json',dataJSON)
 }
 
-const loadNotes = () => {
+const loadNotes = function (){
+
     try {
         const dataBuffer = fs.readFileSync('notes.json')
         const dataJson = dataBuffer.toString()
@@ -60,24 +56,12 @@ const loadNotes = () => {
     } catch (error) {
         return []
     }
-}
 
-const readNotes = (title) => {
-    const notes = loadNotes()
-    const matchNote = notes.find((note) => note.title === title )
-
-    if (matchNote)
-    {
-        console.log(chalk.inverse('Title: ' + matchNote.title))
-        console.log('Body: ' + matchNote.title)
-    }
-    else
-        console.log(chalk.red('Note does not exist'))
+    
 }
 
 module.exports = {
+    getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote,
-    listNotes: listNotes,
-    readNotes: readNotes
+    removeNote: removeNote
 }
